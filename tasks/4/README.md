@@ -117,15 +117,15 @@ I build the image and called it `nginx-kubernetes` to make it easy for testing l
 
 Just to test
 
-![](/tasks/4/Pasted%20image%20260311101825.png)
+![](/tasks/4/Pasted%20image%2020260311101825.png)
 
-![](/tasks/4/Pasted%20image%20260311101843.png)
+![](/tasks/4/Pasted%20image%2020260311101843.png)
 
 So, it is working as expected. Let's create the deployment for it.
 
 Since I am using minikube on a VM I copied the local file to the vm using `scp` command
 
-![](/tasks/4/Pasted%20image%20260311103246.png)
+![](/tasks/4/Pasted%20image%2020260311103246.png)
 
 And I will build the image there and start working.
 
@@ -146,19 +146,19 @@ So, This was so funny. I had a lot of test deployments in this vm and I tried to
 
 Okay, here we go agaaaain
 
-![](/tasks/4/Pasted%20image%20260311112910.png)
+![](/tasks/4/Pasted%20image%2020260311112910.png)
 
 This is amazing. I was specifying  the docker image to be the name I created for it. But minikube docker doesn't see it! and I have to run this command to get it to run `eval $(minikube docker-env)`.
 
-![](/tasks/4/Pasted%20image%20260311114003.png)
+![](/tasks/4/Pasted%20image%2020260311114003.png)
 
 FINAllY!
 
-![](/tasks/4/Pasted%20image%20260311114420.png)
+![](/tasks/4/Pasted%20image%2020260311114420.png)
 
 So, Here is the deployment file I created:
 
-![](/tasks/4/Pasted%20image%20260311114447.png)
+![](/tasks/4/Pasted%20image%2020260311114447.png)
 
 Okay, What did I do?
 
@@ -176,15 +176,15 @@ Then because for some reason the top command doesn't have any way of watching a 
 
 I prompted chatgpt to do it tbh 
 
-![](/tasks/4/Pasted%20image%20260311120755.png)
+![](/tasks/4/Pasted%20image%2020260311120755.png)
 
 But, by running this command `ab -n 100000 -c 1000 -g out.txt http://192.168.49.2:30080/` I was able to observe the CPU usage creeping up and it was balanced across all replicas.
 
 Idle:
-![](/tasks/4/Pasted%20image%20260311121753.png)
+![](/tasks/4/Pasted%20image%2020260311121753.png)
 
 Under load:
-![](/tasks/4/Pasted%20image%20260311121622.png)
+![](/tasks/4/Pasted%20image%2020260311121622.png)
 
 I think that is it for this task.
 
@@ -196,11 +196,11 @@ Requirements:
 
 I already technically did that since the load balancer service is an extension of the node port service but I will do it anyway
 
-![](/tasks/4/Pasted%20image%20260311125331.png)
+![](/tasks/4/Pasted%20image%2020260311125331.png)
 
 The output:
 
-![](/tasks/4/Pasted%20image%20260311125305.png)
+![](/tasks/4/Pasted%20image%2020260311125305.png)
 
 It is a VM, curl works like a browser in the terminal.
 
@@ -222,12 +222,12 @@ kubectl autoscale deployment nginx-deployment --cpu=70 --min=1 --max=10
 
 So, For some reason it doesn't want to run because it complains about the api version. So, Let's create a yaml file for it from the docs and use it insead
 
-![](/tasks/4/Pasted%20image%20260311135814.png)
+![](/tasks/4/Pasted%20image%2020260311135814.png)
 
 Ok, So it worked. I will lower the percentage to something like 10% and load test it and see what will happen.
 
 For some reason. No matter what I try I couldn't get the scaler to work. The code from the docs works since modifying the minReplicas spin up or down pods but adding more on its own is not working for me no matter what I did!
 
-![](/tasks/4/Pasted%20image%20260311142338.png)
+![](/tasks/4/Pasted%20image%2020260311142338.png)
 
 I even added limits but still nothing.
